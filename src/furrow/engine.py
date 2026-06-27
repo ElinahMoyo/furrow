@@ -5,6 +5,7 @@ class Plow:
         self._has_run = False
 
     def run(self):
+        #oky now we search ch boundaried to find indexes
         number = ""
         number_start = None
         number_end = None
