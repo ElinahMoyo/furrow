@@ -43,5 +43,3 @@ Furrow uses a single-pass state machine to parse and structure text layout:
 
 * **`engine.collect()`**: Compiles and returns a list of question data nodes for databases or JSON storage.
 * **`engine.render()`**: Returns the full original text formatted with clean line breaks for UI display.
-
-*Note: You do not need to call the internal parsing loops manually. Calling either `.collect()` or `.render()` triggers `.run()` automatically if it has not executed yet.*
