@@ -1,6 +1,6 @@
 # Furrow 
 
-A lightweight, zero-dependency Python package to extract, segment, and format structured question chains from unformatted, smashed-together text blocks (OCR, handwriting text dumps, unformatted LLM outputs, or transcripts) without data loss.
+A lightweight, zero-dependency Python package to slice, group, and format messy text streams (like raw handwriting recognition outputs, chaotic OCR blocks, or unformatted LLM dumps) into separate lines without losing any of your data.
 
 ## Installation
 
@@ -8,20 +8,25 @@ A lightweight, zero-dependency Python package to extract, segment, and format st
 pip install furrow
 ```
 
-## Usage
+## How to Use It
+
+To format your text cleanly, you need to call the engine's methods sequentially:
 
 ```python
 from furrow import Plow
 
-# 1. Initialize with your raw string
+# 1. Feed it your raw, smashed-together text block
 messy_text = "was1 . i was a girl19.There i with her 500 grapes .7. Amazing!"
 engine = Plow(messy_text)
 
-# 2. Get questions as a list of dictionaries
-print(engine.collect())
-# [{'question_number': '19', 'text': '.There i with her 500 grapes .'}, ...]
+# 2. Run the character boundary scanner (Crucial step!)
+engine.run()
 
-# 3. Get the text layout with newlines safely injected
+# 3. Pull your questions out as a clean list of data blocks
+print(engine.collect())
+# Output: [{'question_number': '19', 'text': '.There i with her 500 grapes .'}, ...]
+
+# 4. Generate the final text string with line breaks perfectly injected
 print(engine.render())
 # Output:
 # was
@@ -30,16 +35,12 @@ print(engine.render())
 # 7. Amazing!
 ```
 
-## How It Works
+## The Processing Sequence
 
-Furrow uses a single-pass state machine to parse and structure text layout:
+Furrow processes your text strings in three distinct, lightweight steps:
 
-* **State Tracking**: Steps through the text character by character to map the exact indices where number blocks start and end.
+*   **Step 1: `engine.run()` (The Tokenizer)** – Steps through your text character by character to find numbers. It maps out their exact start and end coordinates in the string.
+*   **Step 2: `engine.collect()` (The Filter)** – Checks the distance between the numbers it found and trailing periods. This allows it to figure out the difference between inline data (like `500 grapes`) and actual question markers (like `19.`).
+*   **Step 3: `engine.render()` (The Serializer)** – Uses the coordinate maps from the previous steps to slice into the original string and drop a clean newline (`\n`) right before your valid question indices. 
 
-* **Noise Filtering**: Measures the distance between identified numbers and trailing periods. This allows it to separate inline data variables (like `500 grapes`) from actual question indices (like `19.`).
-* **Data Safety**: Injects newline characters (`\n`) via string slicing. This ensures 100% data preservation of non-question text (headers, footers, intro text).
-
-## API Reference
-
-* **`engine.collect()`**: Compiles and returns a list of question data nodes for databases or JSON storage.
-* **`engine.render()`**: Returns the full original text formatted with clean line breaks for UI display.
+Everything that isn't a question (like titles, headers, or instructions) is kept completely safe, unmutated, and untouched.
