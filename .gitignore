@@ -1,0 +1,12 @@
+# Python compiled build artifacts
+dist/
+build/
+*.egg-info/
+src/*.egg-info/
+
+# Local Python environment files
+__pycache__/
+src/furrow/__pycache__/
+.pytest_cache/
+.venv/
+venv/
