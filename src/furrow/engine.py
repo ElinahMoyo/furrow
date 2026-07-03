@@ -21,7 +21,7 @@ class Plow:
                     number_start = i
                     active_number = True
 
-                    number+= current
+                number+= current
             else:
                 if number != "":
                     number_end = i-1
