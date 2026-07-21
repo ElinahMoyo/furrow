@@ -4,10 +4,16 @@ build-backend = "hatchling.build"
 
 [project]
 name = "furrow"
-version = "0.1.2"
+version = "0.1.4"
 description = "A sleek state-machine parser to segment, extract, and format structured question chains from smashed-together text streams (OCR, handwriting text dumps, transcripts, and LLM outputs)."
 readme = "README.md"
 requires-python = ">=3.8"
 license = { text = "MIT" }
-authors = [{ name = "Elinah Moyo", email = "growthsim2@gmail.com" }]
+authors = [{ name = "Elinah Moyo"}]
 dependencies = []
+keywords = ["ocr", "parsing-algorithm","handwriting-recognition", "text-segmentation", "state-machine", "text-cleanup", "florence2"]
+
+[project.urls]
+Homepage = "https://github.com/ElinahMoyo/furrow"
+Repository = "https://github.com/ElinahMoyo/furrow"
+Issues = "https://github.com/ElinahMoyo/furrow/issues"
