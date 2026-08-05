@@ -1,8 +1,4 @@
 class MultipleChoiceDetector():
-### so its almost gonna be the same. we are gonna hacve the same as number detector.
-### first we need a way to find out about how to clarrify MULtiple choice, then followed by a . or a ) or space but then B has to be following or something like that
-### then after that we slice what is between the 
-## qnd test
 
     def __init__(self, text):
         self.text = text
