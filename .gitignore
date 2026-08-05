@@ -4,9 +4,15 @@ build/
 *.egg-info/
 src/*.egg-info/
 
-# Local Python environment files
-__pycache__/
-src/furrow/__pycache__/
+# Python compiled bytecode cache (Blocks them globally in all folders)
+**/__pycache__/
+*.pyc
+
+# Local testing and environment configurations
 .pytest_cache/
 .venv/
 venv/
+
+# Local workspace scratchpads 
+testing.py
+examples/

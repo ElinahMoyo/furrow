@@ -38,7 +38,7 @@ class NumberDetector:
                     number_start = None
                     active_number = False
 
-            if current == ".":
+            if current == "." or current == ")":
                 period_pos = i
 
                 if tokens:

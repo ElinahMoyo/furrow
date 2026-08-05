@@ -1,5 +1,4 @@
-# 1. Import your class from your package
-from engine.detectors import NumberDetector
+from furrow.detectors import NumberDetector
 
 # Test Case 1: Standard number extraction
 def test_detects_single_number():
@@ -19,7 +18,6 @@ def test_no_numbers_returns_empty_list():
 
 # Test Case 3: Testing your special period logic
 def test_period_position_tracking():
-    # This matches your logic where the dot comes within 3 characters of a number's end
     detector = NumberDetector("Target 42. Code red.")
     results = detector.detect()
     

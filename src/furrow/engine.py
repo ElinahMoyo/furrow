@@ -12,6 +12,7 @@ class Plow:
 
             self.token.extend(detected_tokens)
 
+        self.token.sort(key=lambda x: x["start"])
         self._has_run = True
 
     def collect(self):
@@ -55,7 +56,7 @@ class Plow:
         for item in self.token:
             if item.get("is_boundary"):
                 results.append({
-                    "msrker":item["value"],
+                    "marker":item["value"],
                     "marker_type": item["type"],
                     "text": item["text"]
                 })
@@ -81,8 +82,11 @@ class Plow:
 
         for item in boundaries:
             start_pos = item["start"] 
-            formatted_pieces.append(self.text[current_index:start_pos])
-            formatted_pieces.append("\n")
+
+            if start_pos > current_index:
+                formatted_pieces.append(self.text[current_index:start_pos])
+                formatted_pieces.append("\n")
+                
             current_index = start_pos
 
         formatted_pieces.append(self.text[current_index:])
